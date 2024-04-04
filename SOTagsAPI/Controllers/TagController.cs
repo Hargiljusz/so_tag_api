@@ -22,31 +22,48 @@ namespace WebAPI.Controllers
         [HttpGet("/")]
         public async Task<ActionResult<PageWrapper<Tag>>> Index(int pageSize = 10, int pageNumber  = 0, FilterEnum filter = FilterEnum.None)
         {
-            if(! (await _tagSerevice.IsContent()))
+            try
             {
-                await _tagSerevice.InitTags();
+
+                if (!(await _tagSerevice.IsContent()))
+                {
+                    await _tagSerevice.InitTags();
+                }
+                var result = await _tagSerevice.PagedSearch(pageNumber, pageSize, filter);
+                return Ok(new PageWrapper<Tag>(result.Tags, pageSize, pageNumber, result.Count));
             }
-            var result = await  _tagSerevice.PagedSearch(pageNumber, pageSize, filter);
-            return Ok(new PageWrapper<Tag>(result.Tags,pageSize,pageNumber,result.Count));
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest("Something went wrong");
+            }
         }
 
 
         [HttpGet("/refetch")]
         public async Task<ActionResult<bool>> Refetch()
         {
-            var dumpResult = await _tagSerevice.DumpTags();
 
-            if (!dumpResult)
+            try
             {
-                return Ok(dumpResult);
-            }
-            var initResult = await _tagSerevice.InitTags();
+                var dumpResult = await _tagSerevice.DumpTags();
 
-            if (!initResult)
-            {
+                if (!dumpResult)
+                {
+                    return Conflict(dumpResult);
+                }
+                var initResult = await _tagSerevice.InitTags();
+
+                if (!initResult)
+                {
+                    return Conflict(initResult);
+                }
                 return Ok(initResult);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest("Something went wrong");
             }
-            return Ok(initResult);
         }
     }
 }

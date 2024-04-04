@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOTagsAPI.DataCommon", "Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOTagsAPI.DataService", "DataService\SOTagsAPI.DataService.csproj", "{A6B021AB-BF46-46DB-8DBE-E97A9DD504A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOTagsAPI.Test", "SOTagsAPI.Test\SOTagsAPI.Test.csproj", "{A05FD4D4-AEE8-49C3-840B-6CFF0C6363C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOTagsAPI.Test", "SOTagsAPI.Test\SOTagsAPI.Test.csproj", "{A05FD4D4-AEE8-49C3-840B-6CFF0C6363C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0D76687-0A4D-4222-AEEB-6B30C38DE94B}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile.txt = Dockerfile.txt
+		mongodb.yaml = mongodb.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

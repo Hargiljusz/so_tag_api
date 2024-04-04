@@ -32,7 +32,6 @@ builder.Services.AddTransient<ITagService, TagServiceDb>();
 
 var app = builder.Build();
 
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
