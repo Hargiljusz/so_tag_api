@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mongo_01:
+   image: mongo
+   restart: always
+   container_name: mongo_01
+   ports:
+    - 27017:27017
+   volumes:
+    - mongo-volume:/data/db
+  web_api:
+    build: .
+    ports:
+      - 5000:8080
+    depends_on:
+      - mongo_01
+
+
+volumes:
+  mongo-volume:
+    name: mongo-volume      
