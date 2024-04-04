@@ -20,6 +20,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Produces("application/json")]
         public async Task<ActionResult<PageWrapper<Tag>>> Index(int pageSize = 10, int pageNumber  = 0, FilterEnum filter = FilterEnum.None)
         {
             try
@@ -41,6 +44,10 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("/refetch")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [Produces("application/json")]
         public async Task<ActionResult<bool>> Refetch()
         {
 
